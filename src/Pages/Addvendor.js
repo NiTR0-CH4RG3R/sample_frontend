@@ -1,25 +1,19 @@
 import React, { useState } from "react";
 import "./Formstyle.css";
-
-const Addcustomer = () => {
-  function Form() {
-    const [firstname, setFirstName] = useState("");
-    const [lastname, setLastName] = useState("");
+const Addvendor = () => {
+  function Formaddvendor() {
+    const [Name, setName] = useState("");
     const [address, setAddress] = useState("");
     const [email, setEmail] = useState("");
     const [mobileno, setMobileno] = useState("");
     const [officeno, setOfficeno] = useState("");
     const [comments, setComments] = useState("");
-    const [selectedOption, setSelectedOption] = useState("");
     const [isValid, setIsValid] = useState(true);
 
-    const handleFirstNameChange = (event) => {
-      setFirstName(event.target.value);
+    const handleNameChange = (event) => {
+      setName(event.target.value);
     };
 
-    const handleLastNameChange = (event) => {
-      setLastName(event.target.value);
-    };
     const handleAddressChange = (event) => {
       setAddress(event.target.value);
     };
@@ -39,29 +33,12 @@ const Addcustomer = () => {
       setComments(event.target.value);
     };
 
-    const handleSelectChange = (event) => {
-      const selectedValue = event.target.value;
-      setSelectedOption(selectedValue);
-
-      if (selectedValue !== "") {
-        setIsValid(true);
-      } else {
-        setIsValid(false);
-      }
-    };
-
     const handleSubmit = (event) => {
       event.preventDefault();
 
-      if (
-        firstname.trim() === "" ||
-        lastname.trim() === "" ||
-        mobileno.trim() === "" ||
-        email.trim() === "" ||
-        selectedOption === ""
-      ) {
+      if (Name.trim() === "" || email.trim() === "") {
         alert(
-          "Please fill in all required fields (First Name, Last Name, Mobile, Category)"
+          "Please fill in all required fields (Name, Mobile, Address,email)"
         );
         setIsValid(false);
       } else if (!validateEmail(email)) {
@@ -70,11 +47,9 @@ const Addcustomer = () => {
       } else {
         setIsValid(true);
         console.log("Form submitted with the following data:");
-        console.log("First Name:", firstname);
-        console.log("Last Name:", lastname);
+        console.log("Name:", Name);
         console.log("Address:", address);
         console.log("Email:", email);
-        console.log("Category:", selectedOption);
         console.log("Mobileno:", mobileno);
         console.log("Officeno:", officeno);
         console.log("comment:", comments);
@@ -87,11 +62,10 @@ const Addcustomer = () => {
     };
 
     const clearForm = () => {
-      setFirstName("");
-      setLastName("");
+      setName("");
       setEmail("");
       setMobileno("");
-      setSelectedOption("");
+      setOfficeno("");
       setAddress("");
       setComments("");
       setIsValid(true);
@@ -100,33 +74,23 @@ const Addcustomer = () => {
     return (
       <div>
         <center>
-          <h1>ADD CUSTOMER TABLE</h1>
+          <h1>ADD VENDOR TABLE</h1>
         </center>
 
         <form onSubmit={handleSubmit}>
           <table className="table">
             <tr>
               <td class="cell">
-                <label>First Name</label>
+                <label>Name</label>
               </td>
 
-              <td class="cell">
+              <td class="cell" colspan="3">
                 <input
                   type="text"
                   className="inputBox"
-                  name="firstname"
-                  value={firstname}
-                  onChange={handleFirstNameChange}
-                />
-              </td>
-              <td class="cell">Last Name</td>
-              <td class="cell">
-                <input
-                  type="text"
-                  className="inputBox"
-                  name="lastname"
-                  value={lastname}
-                  onChange={handleLastNameChange}
+                  name="Name"
+                  value={Name}
+                  onChange={handleNameChange}
                 />
               </td>
             </tr>
@@ -145,7 +109,7 @@ const Addcustomer = () => {
 
             <tr>
               <td class="cell">Email</td>
-              <td class="cell">
+              <td class="cell" colspan="3">
                 <input
                   type="email"
                   className="inputBox"
@@ -153,26 +117,6 @@ const Addcustomer = () => {
                   value={email}
                   onChange={handleEmailChange}
                 />
-              </td>
-              <td class="cell">Category</td>
-              <td>
-                <select
-                  id="Category"
-                  name="Category"
-                  className="inputBox"
-                  value={selectedOption}
-                  onChange={handleSelectChange}
-                >
-                  <option value="" disabled selected>
-                    Select an option
-                  </option>
-                  <option value="guest" name="guest" id="guest">
-                    Guest
-                  </option>
-                  <option value="real" name="real">
-                    Real
-                  </option>
-                </select>
               </td>
             </tr>
 
@@ -216,9 +160,9 @@ const Addcustomer = () => {
               <td class="cell">
                 <input
                   type="button"
-                  onClick={clearForm}
                   value="clear"
                   className="inputBox"
+                  onClick={clearForm}
                 />
               </td>
               <td class="cell">
@@ -237,4 +181,4 @@ const Addcustomer = () => {
   }
 };
 
-export default Addcustomer;
+export default Addvendor;
